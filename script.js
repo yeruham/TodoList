@@ -1,23 +1,42 @@
-const saveNewTask = document.getElementById("add-button")
-// console.log(saveNewTask)
-saveNewTask.addEventListener('click', addNewTask)
+function createTaskElement(text){
+    const newTaskElement = document.createElement("li")
+    newTaskElement.className = "task"
+    newTaskElement.innerText = text
+    return newTaskElement
+}
 
-function addNewTask(){
-    const listTask = document.getElementById("body")
-    // console.log(listTask)
-    const newTask = document.getElementById("input-task")
-    // console.log(newTask)
-    if (!newTask.value){
+
+function readInput(id){
+    const taskInput = document.getElementById(id)
+    const value = taskInput.value
+    taskInput.value = ""
+    return value
+}
+
+
+function addNewTask(inputId, listTaskId){
+    const newTask = readInput(inputId)
+    if (!newTask){
         return
     }
-    const tasks = document.getElementById("list-tasks")
-    // console.log(tasks)
-    const task = document.createElement("li")
-    task.className = "task"
-    task.innerText = newTask.value
-    tasks.appendChild(task)
-    newTask.value = ""
+    const listTasks = document.getElementById(listTaskId)
+    const newTaskElement = createTaskElement(newTask)
+    listTasks.appendChild(newTaskElement)
+}
+
+
+function addTaskByEnter(key, inputId, listTaskId){
+    if (key != "Enter"){
+        return
+    }
+    addNewTask( inputId, listTaskId)
 }
 
 
 
+const saveNewTask = document.getElementById("add-button")
+saveNewTask.addEventListener('click', () => { addNewTask("input-task", "list-tasks") })
+
+
+const inputTask = document.getElementById("input-task")
+inputTask.addEventListener('keydown', (event) => {addTaskByEnter(event.key, "input-task", "list-tasks")})
