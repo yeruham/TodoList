@@ -4,7 +4,7 @@ body {
 }
 
 h1 {
-    background-color: rgb(224, 149, 115);
+    background-color: rgb(220, 119, 73);
     color: white;
     margin-top: 0;
     height: 100px;
@@ -12,4 +12,17 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
+} 
+
+#add-button{
+        background-color: rgb(222, 147, 112);
+        color: white;
+        border-color: rgb(220, 119, 73);
+        border-style: solid;
+        height: 50px;
+        width: 10%;
+        border-radius: 10px; 
+        cursor: pointer;
+        font-size: 20px;
+        margin-left: 45%;
 }
