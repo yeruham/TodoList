@@ -14,29 +14,25 @@ h1 {
     align-items: center;
 } 
 
-#add-button{
-        background-color: rgb(222, 147, 112);
-        color: white;
-        border-color: rgb(220, 119, 73);
-        border-style: solid;
-        height: 50px;
-        width: 20%;
-        border-radius: 10px; 
-        cursor: pointer;
-        font-size: 20px;
-        margin-left: 40%;
-}
 
-#list-task-to-do{
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
-    /* text-align: center; */
+div {
     background-color: rgb(222, 147, 112);
     margin-left: 20%;
     margin-right: 20%;
     margin-bottom: 20px;
-    padding: 5px;
+    padding: 15px; 
+}
+
+#add-button{
+    background-color: rgb(220, 97, 40);
+    color: white;
+    height: 50px;
+    width: 20%;
+    border-color: white;
+    border-style: solid;
+    border-radius: 10px; 
+    cursor: pointer;
+    font-size: 20px;
 }
 
 .task{
@@ -44,4 +40,14 @@ h1 {
     border-bottom: 1px solid rgb(249, 252, 228);
     list-style-type: none;
     margin-bottom: 20px; 
+}
+
+
+#input-task{
+    width: 60%;
+    height: 30px;
+    border-color: rgb(220, 119, 73);
+    border-style: solid;
+    margin-right: 10%;
+    margin-left: 3%;
 }

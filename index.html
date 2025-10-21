@@ -6,15 +6,19 @@
     <title>TodoList</title>
     <link href="style.css" rel="stylesheet">
 </head>
-<body>
+<body id="body">
     <h1>Todo List</h1>
-    <div id="list-task-to-do">
+    <div>
         <h2>task to do:</h2>
-        <ul>
+        <ul  id="list-tasks">
             <li class="task">first task</li>
             <li class="task">seconde task</li>
         </ul>
     </div>
-    <button  id="add-button">add new task</button>
+    <div>
+    <input type="text" id="input-task" placeholder="  write new task">
+    <button  id="add-button">save new task</button>
+    </div>
 </body>
+<script src="script.js"></script>
 </html>
