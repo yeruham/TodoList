@@ -23,23 +23,41 @@ div {
     padding: 15px; 
 }
 
-#add-button{
+
+button {
     background-color: rgb(220, 97, 40);
     color: white;
+    border-color: white;
+    border-style: solid; 
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.7;
+}
+
+button:active {
+    opacity: 0.3;
+}
+
+#add-button{
     height: 50px;
     width: 20%;
-    border-color: white;
-    border-style: solid;
-    border-radius: 10px; 
-    cursor: pointer;
     font-size: 20px;
+    border-radius: 10px;
 }
 
 .task{
+    list-style-type: none;
+}
+
+.text-task{
     font-size: 20px;
     border-bottom: 1px solid rgb(249, 252, 228);
-    list-style-type: none;
     margin-bottom: 20px; 
+    margin-right: 5%;
+    width: 80%;
+    display: inline-block;
 }
 
 
@@ -50,4 +68,9 @@ div {
     border-style: solid;
     margin-right: 10%;
     margin-left: 3%;
+}
+
+.delete-task{
+    border-width: 1px;
+    border-radius: 3px;
 }
