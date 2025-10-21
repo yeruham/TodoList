@@ -1,0 +1,15 @@
+body {
+    background-color: rgb(249, 252, 228);
+    margin: 0;
+}
+
+h1 {
+    background-color: rgb(224, 149, 115);
+    color: white;
+    margin-top: 0;
+    height: 100px;
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
