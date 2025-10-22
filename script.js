@@ -21,7 +21,11 @@ function createDoneButton(){
     newDoneElement.setAttribute("type", "submit");
     newDoneElement.className = "done-task";
     newDoneElement.innerText = "mark as done";
-    newDoneElement.addEventListener('click', (e) => {  e.target.className="done"; e.target.innerText="done"; })
+    newDoneElement.addEventListener('click', (e) => { 
+        e.target.className="done"; 
+        e.target.innerText="done"; 
+        moveDoneTask(e.target.parentElement) 
+    })
     return newDoneElement;
 }
 
@@ -31,7 +35,7 @@ function createEditButton(){
     newEditElement.setAttribute("type", "submit");
     newEditElement.className = "edit-task";
     newEditElement.innerText = "edit";
-    newEditElement.addEventListener('click', (e) => { editTask(e) });
+    newEditElement.addEventListener('click', (e) => { editTaskByKeys(e) });
     return newEditElement;
 }
 
@@ -82,7 +86,7 @@ function addTaskByEnter(key, inputId, listTaskId){
 }
 
 
-function editTask(e){
+function editTaskByKeys(e){
     const currentTaskElement = e.target.parentElement;
     const currentTextElement = currentTaskElement.getElementsByClassName("text-task")[0]
 
@@ -91,25 +95,30 @@ function editTask(e){
     editButton.value = currentTextElement.innerText
 
     currentTaskElement.replaceWith(editButton)
-    editButton.addEventListener("keydown", (e) => 
-        {
-            if (e.key == "Enter"){
-                currentTextElement.innerText = editButton.value 
-                editButton.replaceWith(currentTaskElement)
-            }else if (e.key == "Escape"){
-                editButton.replaceWith(currentTaskElement)
-            }else{
-                return;
-            }
-        })
+    editButton.addEventListener("keydown", (e) => {     
+        if (e.key == "Enter"){
+            currentTextElement.innerText = editButton.value;
+            editButton.replaceWith(currentTaskElement);
+        }else if (e.key == "Escape"){
+            editButton.replaceWith(currentTaskElement);
+        }else{
+            return;
+        } 
+    })
 }
 
 
+function moveDoneTask(taskElement){
+    const doneTasks = document.getElementById("done-tasks")
+    console.log(taskElement)
+    doneTasks.appendChild(taskElement)
+}
+
 
 const saveNewTask = document.getElementById("add-button");
-saveNewTask.addEventListener('click', () => { addNewTask("input-task", "list-tasks") });
+saveNewTask.addEventListener('click', () => { addNewTask("input-task", "todo-tasks-to-do") });
 
 
 const inputTask = document.getElementById("input-task");
-inputTask.addEventListener('keydown', (event) => { addTaskByEnter(event.key, "input-task", "list-tasks") });
+inputTask.addEventListener('keydown', (event) => { addTaskByEnter(event.key, "input-task", "todo-tasks") });
 inputTask.innerHTML
