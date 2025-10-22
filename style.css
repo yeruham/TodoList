@@ -54,14 +54,15 @@ button:active {
 .text-task{
     font-size: 20px;
     border-bottom: 1px solid rgb(249, 252, 228);
-    margin-bottom: 20px; 
+    margin-top: 15px;
+    margin-bottom: 15px; 
     margin-right: 5%;
-    width: 70%;
+    width: 65%;
     display: inline-block;
 }
 
 
-#input-task{
+.input-text{
     width: 60%;
     height: 30px;
     border-color: rgb(220, 119, 73);
@@ -97,3 +98,11 @@ button:active {
 .done:active{
     opacity: 1;
 }
+
+
+.edit-task{
+    border-width: 1px;
+    border-radius: 3px;
+    margin-right: 5px;
+}
+
