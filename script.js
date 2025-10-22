@@ -109,14 +109,14 @@ function editTaskByKeys(e){
 
 
 function moveDoneTask(taskElement){
-    const doneTasks = document.getElementById("done-tasks")
-    doneTasks.appendChild(taskElement)
+    const doneTasks = document.getElementById("done-tasks");
+    doneTasks.appendChild(taskElement);
 }
 
 
 function deleteTasks(listTasksId){
-    const doneTasks = document.getElementById(listTasksId)
-    doneTasks.innerHTML = ""
+    const doneTasks = document.getElementById(listTasksId);
+    doneTasks.innerHTML = "";
 }
 
 
