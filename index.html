@@ -8,17 +8,13 @@
 </head>
 <body id="body">
     <h1>Todo List</h1>
+    <div id="buttons">    
+        <button class="delete-task" id="delete-all-tasks">delete all</button>
+        <button class="delete-task" id="delete-done-tasks">delete all done tasks</button>
+    </div>
     <div>
         <h2>tasks to do:</h2>
-        <ul  id="todo-tasks">
-            <!-- task for example - the button's doesn't really works -->
-            <li class="task">
-                <span class="text-task">first task</span>
-                <button type="submit" class="edit-task">edit</button>
-                <button type="submit" class="delete-task">delete</button>
-                <button type="submit" class="done-task">done</button>
-            </li>
-        </ul>
+        <ul  id="todo-tasks"></ul>
     </div>
     <div>
         <input type="text" id="input-task" class="input-text" placeholder="  write new task">
@@ -26,9 +22,7 @@
     </div>
     <div>
         <h2>done tasks:</h2>
-        <ul id="done-tasks">
-            
-        </ul>
+        <ul id="done-tasks"></ul>
     </div>
 </body>
 <script src="script.js"></script>

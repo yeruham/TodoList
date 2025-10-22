@@ -67,12 +67,12 @@ function readInput(id){
 }
 
 
-function addNewTask(inputId, listTaskId){
+function addNewTask(inputId, listTasksId){
     const newTask = readInput(inputId);
     if (!newTask){
         return;
     }
-    const listTasks = document.getElementById(listTaskId);
+    const listTasks = document.getElementById(listTasksId);
     const newTaskElement = createTaskElement(newTask);
     listTasks.appendChild(newTaskElement);
 }
@@ -110,15 +110,28 @@ function editTaskByKeys(e){
 
 function moveDoneTask(taskElement){
     const doneTasks = document.getElementById("done-tasks")
-    console.log(taskElement)
     doneTasks.appendChild(taskElement)
 }
 
 
+function deleteTasks(listTasksId){
+    const doneTasks = document.getElementById(listTasksId)
+    doneTasks.innerHTML = ""
+}
+
+
+
 const saveNewTask = document.getElementById("add-button");
-saveNewTask.addEventListener('click', () => { addNewTask("input-task", "todo-tasks-to-do") });
+saveNewTask.addEventListener('click', () => { addNewTask("input-task", "todo-tasks") });
 
 
 const inputTask = document.getElementById("input-task");
 inputTask.addEventListener('keydown', (event) => { addTaskByEnter(event.key, "input-task", "todo-tasks") });
-inputTask.innerHTML
+
+
+const deleteAll = document.getElementById("delete-all-tasks");
+deleteAll.addEventListener('click', () => { deleteTasks("todo-tasks"); deleteTasks("done-tasks"); });
+
+
+const deleteDoneTasks = document.getElementById("delete-done-tasks");
+deleteDoneTasks.addEventListener('click', () => { deleteTasks("done-tasks"); });
