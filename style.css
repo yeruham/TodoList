@@ -56,7 +56,7 @@ button:active {
     border-bottom: 1px solid rgb(249, 252, 228);
     margin-bottom: 20px; 
     margin-right: 5%;
-    width: 80%;
+    width: 70%;
     display: inline-block;
 }
 
@@ -73,4 +73,27 @@ button:active {
 .delete-task{
     border-width: 1px;
     border-radius: 3px;
+    margin-right: 5px;
+}
+
+.done-task{
+    background-color: rgb(220, 97, 40, 0.5);
+    color: rgb(255, 255, 255, 0.3);
+    border-width: 1px;
+    border-radius: 3px;
+}
+
+
+.done{ 
+    background-color: rgb(134, 62, 23);
+    border: none;
+    cursor: auto;
+}
+
+.done:hover{
+    opacity: 1;
+}
+
+.done:active{
+    opacity: 1;
 }
