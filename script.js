@@ -1,26 +1,34 @@
-function createTaskElement(text, id){
-    const newTaskElement = document.createElement("li")
-    newTaskElement.className = "task"
-
-    const newSpanElement = document.createElement("span")
-    newSpanElement.innerText = text
-    newSpanElement.className = "text-task"
-    newSpanElement.id = id
-
-    newTaskElement.appendChild(newSpanElement)
+function createTaskElement(text){
+    const newTaskElement  = document.createElement("span")
+    newTaskElement.innerText = text
+    newTaskElement.className = "text-task"
     return newTaskElement
 }
 
 
-
 function createDeleteElement(){
-    const newTaskElement = document.createElement("button")
-    newTaskElement.setAttribute("type", "submit")
-    newTaskElement.className = "delete-task"
-    newTaskElement.innerText = "delete"
-    newTaskElement.addEventListener('click', (e) => { deleteTaskElement(e) })
-    return newTaskElement 
+    const newDeleteElement = document.createElement("button")
+    newDeleteElement.setAttribute("type", "submit")
+    newDeleteElement.className = "delete-task"
+    newDeleteElement.innerText = "delete"
+    newDeleteElement.addEventListener('click', (e) => {  e.target.parentElement.remove() })
+    return newDeleteElement
 }
+
+
+function createFullTaskElement(text){
+    const taskElement = createTaskElement(text)
+    const deleteElement = createDeleteElement()
+
+    const fullTaskElement = document.createElement("li")
+    fullTaskElement.className = "task"
+    
+    fullTaskElement.appendChild(taskElement)
+    fullTaskElement.appendChild(deleteElement)
+
+    return fullTaskElement
+}
+
 
 
 function readInput(id){
@@ -31,30 +39,22 @@ function readInput(id){
 }
 
 
-function addNewTask(inputId, listTaskId, newId){
+function addNewTask(inputId, listTaskId){
     const newTask = readInput(inputId)
     if (!newTask){
         return
     }
     const listTasks = document.getElementById(listTaskId)
-    const newTaskElement = createTaskElement(newTask, newId)
-    const newDeleteElement = createDeleteElement()
-    newTaskElement.appendChild(newDeleteElement)
+    const newTaskElement = createFullTaskElement(newTask)
     listTasks.appendChild(newTaskElement)
 }
 
 
-function addTaskByEnter(key, inputId, listTaskId, newId){
+function addTaskByEnter(key, inputId, listTaskId){
     if (key != "Enter"){
         return
     }
     addNewTask( inputId, listTaskId)
-}
-
-
-function deleteTaskElement(e){
-    console.log("deleted")
-    console.log(e)
 }
 
 
