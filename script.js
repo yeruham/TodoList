@@ -101,7 +101,7 @@ function editTaskByKeys(e){
         if (e.key == "Enter"){
             currentTextElement.innerText = editButton.value;
             editButton.replaceWith(currentTaskElement);
-            
+
             const localStorageKey = currentTaskElement.parentElement.id;
             const taskId = currentTaskElement.id;
             editValueInLocalStorage(localStorageKey, taskId, editButton.value);
@@ -196,7 +196,23 @@ function editValueInLocalStorage(key, id, newValue){
 }
 
 
-const tasksKey = "tasks"
+function tasksFromLocalStorage(key){
+    let listOfValues = localStorage.getItem(key);
+    if (listOfValues == null){
+        return;
+    }
+    listOfValues = JSON.parse(listOfValues);
+    const listTasks = document.getElementById(key);
+    listOfValues.forEach((value) => {
+        console.log(value)
+        textTask = value.task
+        const newTaskElement = createTaskElement(textTask);
+        newTaskElement.id = value.id;
+        listTasks.appendChild(newTaskElement);
+    });
+}
+
+const tasksKey = "todo-tasks"
 const doneTasksKey = "done-tasks"
 
 
@@ -214,3 +230,7 @@ deleteAll.addEventListener('click', () => { deleteTasks("todo-tasks"); deleteTas
 
 const deleteDoneTasks = document.getElementById("delete-done-tasks");
 deleteDoneTasks.addEventListener('click', () => { deleteTasks("done-tasks"); localStorage.removeItem(doneTasksKey); });
+
+
+tasksFromLocalStorage(tasksKey)
+tasksFromLocalStorage(doneTasksKey)
