@@ -32,15 +32,6 @@ div {
     align-items: center;
 }
 
-/* .delete-all{
-    width: 200px;
-    height: 30px;
-    border-width: 1px;
-    border-radius: 3px;
-    margin-left: 10px;
-    margin-right: 10px;
-} */
-
 
 button {
     background-color: rgb(220, 97, 40);
@@ -97,7 +88,7 @@ button:active {
 
 .done-task{
     background-color: rgb(220, 97, 40, 0.5);
-    color: rgb(255, 255, 255, 0.3);
+    color: rgb(255, 255, 255);
     border-width: 1px;
     border-radius: 3px;
 }
