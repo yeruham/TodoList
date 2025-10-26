@@ -24,7 +24,7 @@ export function editTaskByKeys(e){
 
             const localStorageKey = currentTaskElement.parentElement.id;
             const taskId = currentTaskElement.id;
-            taskLocalStorage.editValue(localStorageKey, taskId, editButton.value);
+            taskLocalStorage.editValue(taskId, editButton.value);
 
         }else if (e.key == "Escape"){
             editButton.replaceWith(currentTaskElement);
@@ -41,20 +41,19 @@ export function moveDoneTask(taskElement){
     taskElement.getElementsByClassName("done-task")[0].remove()
     taskElement.appendChild(createDoneButton(true))
     let localStorageKey = taskElement.parentElement.id;
-    taskLocalStorage.deleteValue(localStorageKey, taskElement.id);
+    localStorage.removeItem(taskElement.id);
 
     const doneTasks = document.getElementById("done-tasks");
     doneTasks.appendChild(taskElement);
     localStorageKey = doneTasks.id;
     const textTask = taskElement.getElementsByClassName("text-task")[0].innerText;
-    taskElement.id = taskLocalStorage.addValue(localStorageKey, textTask);
+    taskElement.id = taskLocalStorage.addValue(true, textTask);
 }
 
 
 export function deleteTask(taskElement){
     // delete one task from the page and local storage.  
     const taskId = taskElement.id
-    const localStorageKey = taskElement.parentElement.id
     taskElement.remove();
-    taskLocalStorage.deleteValue(localStorageKey, taskId);
+    localStorage.removeItem(taskId)
 }

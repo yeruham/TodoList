@@ -1,50 +1,55 @@
-export function addValue(key, value){
-    let listOfValues = localStorage.getItem(key);
-    const valueId = Date.now()
-    const localStorageValue = {"task": value, "id": valueId};
-    if (listOfValues == null){
-        let newList = [];
-        newList.push(localStorageValue);
-        newList = JSON.stringify(newList);
-        localStorage.setItem(key, newList);
-    }
-    else{
-        listOfValues = JSON.parse(listOfValues);
-        listOfValues.push(localStorageValue);
-        listOfValues = JSON.stringify(listOfValues);
-        localStorage.setItem(key, listOfValues);
-    }
-    return valueId
+import * as elements from './elements.js';
+
+
+export function addValue(isDone, value){
+    const valueId = Date.now();
+    let localStorageValue = {"task": value, "done": isDone};
+    localStorageValue = JSON.stringify(localStorageValue);
+    localStorage.setItem(valueId, localStorageValue);
+    return valueId;
 }
 
 
-export function deleteValue(key, id){
-    let listOfValues = localStorage.getItem(key);
-    if (listOfValues == null){
+export function editValue(id, newValue){
+    let value = localStorage.getItem(id);
+    if (value == null){
         return;
     }
-    listOfValues = JSON.parse(listOfValues);
-    for (let i = 0; i < listOfValues.length; i++){
-        if (listOfValues[i].id == id){
-            const deletedValue = listOfValues.splice(i, 1);
-        }
-    }
-    listOfValues = JSON.stringify(listOfValues);
-    localStorage.setItem(key, listOfValues);
+    value = JSON.parse(value);
+    value.task = newValue;
+    value = JSON.stringify(value);
+    localStorage.setItem(id, value);
 }
 
 
-export function editValue(key, id, newValue){
-    let listOfValues = localStorage.getItem(key);
-    if (listOfValues == null){
-        return;
-    }
-    listOfValues = JSON.parse(listOfValues);
-    for (let i = 0; i < listOfValues.length; i++){
-        if (listOfValues[i].id == id){
-            listOfValues[i].task = newValue;
+export function deleteDoneTasks(){
+    const tasks = Object.entries(localStorage);
+    for (let [key, value] of tasks){
+        value = JSON.parse(value);
+        if (value.done){
+            localStorage.removeItem(key);
         }
     }
-    listOfValues = JSON.stringify(listOfValues);
-    localStorage.setItem(key, listOfValues);
+}
+
+
+export function tasksFromLocalStorage(listTasksId, listDoneTasksId){
+    const tasks = Object.entries(localStorage)
+    if (tasks == null){
+        return;
+    }
+    const listTasks = document.getElementById(listTasksId);
+    const listDoneTasks = document.getElementById(listDoneTasksId)
+    for (let [key, value] of tasks){
+        value = JSON.parse(value);
+        const textTask = value.task;
+        const newTaskElement = elements.createTaskElement(textTask, value.done);
+        newTaskElement.id = key;
+        if (value.done){
+            listDoneTasks.appendChild(newTaskElement)
+        }
+        else{
+            listTasks.appendChild(newTaskElement);
+        }
+    }
 }

@@ -19,7 +19,7 @@ function addNewTask(inputId, listTasksId){
     const newTaskElement = elements.createTaskElement(newTask);
     listTasks.appendChild(newTaskElement);
 
-    newTaskElement.id = taskLocalStorage.addValue(listTasksId, newTask)
+    newTaskElement.id = taskLocalStorage.addValue(false, newTask)
 }
 
 
@@ -37,29 +37,11 @@ export function deleteTasks(listTasksId){
 }
 
 
-function tasksFromLocalStorage(key){
-    // pulls out all the tasks that are stored in local storage key, constructs for each text the task-element,
-    // and puts it into the page as he was. 
-    let listOfValues = localStorage.getItem(key);
-    if (listOfValues == null){
-        return;
-    }
-    listOfValues = JSON.parse(listOfValues);
-    const listTasks = document.getElementById(key);
-    listOfValues.forEach((value) => {
-        const textTask = value.task;
-        const newTaskElement = elements.createTaskElement(textTask);
-        newTaskElement.id = value.id;
-        listTasks.appendChild(newTaskElement);
-    });
-}
-
-
 
 const listTasksId = "todo-tasks"
 const listDoneTasksId = "done-tasks"
-const tasksKey = listTasksId
-const doneTasksKey = listDoneTasksId
+// const tasksKey = listTasksId
+// const doneTasksKey = listDoneTasksId
 const inputId = "input-task"
 
 
@@ -83,9 +65,9 @@ deleteAll.addEventListener('click', () => {
 const deleteDoneTasks = document.getElementById("delete-done-tasks");
 deleteDoneTasks.addEventListener('click', () => {
     deleteTasks(listDoneTasksId);
-    localStorage.removeItem(doneTasksKey); 
+    // localStorage.removeItem(doneTasksKey); 
+    taskLocalStorage.deleteDoneTasks();
 });
 
 // pulls out all the exist task from the local storage 
-tasksFromLocalStorage(tasksKey)
-tasksFromLocalStorage(doneTasksKey)
+taskLocalStorage.tasksFromLocalStorage(listTasksId, listDoneTasksId)
