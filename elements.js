@@ -1,4 +1,4 @@
-import { deleteTask, moveDoneTask, editTaskByKeys } from './buttonsFunctions.js';
+import { deleteTask, moveDoneTask, editTaskByKeys, displayEditButton, nonDisplayEditButton, styleOfTaskElement } from './buttonsFunctions.js';
 
 
 export function createTextElement(text){
@@ -48,14 +48,26 @@ export function createEditButton(){
 }
 
 
+export function createTaskFrame(isDone=false){
+    const taskFrame = document.createElement("li");
+    taskFrame.className = "task";
+    if (!isDone){
+        taskFrame.addEventListener("mouseenter", (e) => { displayEditButton(e.target) });
+        taskFrame.addEventListener("mouseleave", (e) => { nonDisplayEditButton(e.target) });
+    }else{
+        styleOfTaskElement(taskFrame, normal=true)
+    }
+    return taskFrame;
+}
+
+
 export function createTaskElement(text, done=false){
     const textElement = createTextElement(text);
     const editElement = createEditButton();
     const deleteElement = createDeleteButton();
     const doneElement = createDoneButton(done);
 
-    const fullTaskElement = document.createElement("li");
-    fullTaskElement.className = "task";
+    const fullTaskElement = createTaskFrame(done);
     
     fullTaskElement.appendChild(textElement);
     fullTaskElement.appendChild(editElement);

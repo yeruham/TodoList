@@ -23,6 +23,7 @@ function addNewTask(inputId, listTasksId){
 }
 
 
+
 function addTaskByEnter(key, inputId, listTaskId){
     if (key != "Enter"){
         return;
@@ -31,17 +32,14 @@ function addTaskByEnter(key, inputId, listTaskId){
 }
 
 
-export function deleteTasks(listTasksId){
+function deleteTasks(listTasksId){
     const doneTasks = document.getElementById(listTasksId);
     doneTasks.innerHTML = "";
 }
 
 
-
 const listTasksId = "todo-tasks"
 const listDoneTasksId = "done-tasks"
-// const tasksKey = listTasksId
-// const doneTasksKey = listDoneTasksId
 const inputId = "input-task"
 
 
@@ -65,7 +63,6 @@ deleteAll.addEventListener('click', () => {
 const deleteDoneTasks = document.getElementById("delete-done-tasks");
 deleteDoneTasks.addEventListener('click', () => {
     deleteTasks(listDoneTasksId);
-    // localStorage.removeItem(doneTasksKey); 
     taskLocalStorage.deleteDoneTasks();
 });
 

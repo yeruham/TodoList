@@ -39,6 +39,8 @@ export function moveDoneTask(taskElement){
     // move done task from tasks element to done-tasks element and from tasks key to done-tasks in local storage.
     // accepts as a parameter event of done button. \
     taskElement.getElementsByClassName("done-task")[0].remove()
+    taskElement.getElementsByClassName("edit-task")[0].remove()
+    styleOfTaskElement(taskElement, normal=true)
     taskElement.appendChild(createDoneButton(true))
     let localStorageKey = taskElement.parentElement.id;
     localStorage.removeItem(taskElement.id);
@@ -52,8 +54,34 @@ export function moveDoneTask(taskElement){
 
 
 export function deleteTask(taskElement){
-    // delete one task from the page and local storage.  
+    // delete one task from the page and local storage.
     const taskId = taskElement.id
     taskElement.remove();
     localStorage.removeItem(taskId)
+}
+
+
+export function displayEditButton(taskElement){
+    const editeButton = taskElement.getElementsByClassName("edit-task")[0]
+    editeButton.style.display = "inline";
+    styleOfTaskElement(taskElement, normal=false)
+}
+
+
+export function nonDisplayEditButton(taskElement){
+    const editeButton = taskElement.getElementsByClassName("edit-task")[0]
+    editeButton.style.display = "none";
+    styleOfTaskElement(taskElement, normal=true)
+}
+
+
+export function styleOfTaskElement(taskElement, normal=true){
+    if (normal){
+        taskElement.style.backgroundColor = "rgb(249, 252, 228)";
+        taskElement.style.border = "1px solid black";
+    }
+    else{
+        taskElement.style.backgroundColor = "rgb(252, 252, 252)";
+        taskElement.style.border = "40px";
+    }
 }
