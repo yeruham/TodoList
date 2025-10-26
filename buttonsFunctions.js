@@ -64,14 +64,14 @@ export function deleteTask(taskElement){
 export function displayEditButton(taskElement){
     const editeButton = taskElement.getElementsByClassName("edit-task")[0]
     editeButton.style.display = "inline";
-    styleOfTaskElement(taskElement, normal=false)
+    styleOfTaskElement(taskElement, false)
 }
 
 
 export function nonDisplayEditButton(taskElement){
     const editeButton = taskElement.getElementsByClassName("edit-task")[0]
     editeButton.style.display = "none";
-    styleOfTaskElement(taskElement, normal=true)
+    styleOfTaskElement(taskElement, true)
 }
 
 

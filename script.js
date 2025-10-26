@@ -68,3 +68,36 @@ deleteDoneTasks.addEventListener('click', () => {
 
 // pulls out all the exist task from the local storage 
 taskLocalStorage.tasksFromLocalStorage(listTasksId, listDoneTasksId)
+
+
+// const listTasks = document.getElementById(listTasksId)
+// listTasks.addEventListener("dragover", (e) => { 
+//         e.preventDefault();
+//        })
+
+
+// listTasks.addEventListener("drop", (e) => {console.log("drop drop");
+//     console.log(e.target);
+//     const draggedElement = document.getElementById(e.dataTransfer.getData("text"));
+//     // listTasks.appendChild(document.getElementById(e.dataTransfer.getData("text")));
+//     const afterElement = getDragAfterElement(listTasks, e.clientY)
+//     console.log(afterElement)
+//     if (afterElement == undefined){
+//         listTasks.appendChild(draggedElement) // add to the end
+//     }else{
+//         listTasks.insertBefore(draggedElement, afterElement)
+//     }
+// })
+
+// const getDragAfterElement = (container, y) => {
+//   const notDraggedCards =
+//     [...container.querySelectorAll(".task")]
+  
+//   return notDraggedCards.reduce((closest, child) => {
+//     const box = child.getBoundingClientRect()
+//     const offset = y - box.top - box.height / 2
+//     if (offset < 0 && offset > closest.offset) {
+//       return { offset, element: child }
+//     } else return closest
+//   }, { offset: Number.NEGATIVE_INFINITY }).element
+// }
