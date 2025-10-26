@@ -19,16 +19,21 @@ export function createDeleteButton(){
 }
 
 
-export function createDoneButton(){
+export function createDoneButton(done=false){
     const newDoneElement = document.createElement("button");
     newDoneElement.setAttribute("type", "submit");
-    newDoneElement.className = "done-task";
-    newDoneElement.innerText = "mark as done";
-    newDoneElement.addEventListener('click', (e) => { 
-        e.target.className="done"; 
-        e.target.innerText="done"; 
-        moveDoneTask(e.target.parentElement) 
+    if (!done){
+        newDoneElement.className = "done-task";
+        newDoneElement.innerText = "mark as done";
+        newDoneElement.addEventListener('click', (e) => { 
+        moveDoneTask(e.target.parentElement)  
     })
+    }
+    else{
+        newDoneElement.className="done"; 
+        newDoneElement.innerText="done";
+    }
+
     return newDoneElement;
 }
 
@@ -43,11 +48,11 @@ export function createEditButton(){
 }
 
 
-export function createTaskElement(text){
+export function createTaskElement(text, done=false){
     const textElement = createTextElement(text);
     const editElement = createEditButton();
     const deleteElement = createDeleteButton();
-    const doneElement = createDoneButton();
+    const doneElement = createDoneButton(done);
 
     const fullTaskElement = document.createElement("li");
     fullTaskElement.className = "task";

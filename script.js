@@ -82,7 +82,7 @@ deleteAll.addEventListener('click', () => {
 // create click evenet on delete-done-tasks button - to dealte all done tasks
 const deleteDoneTasks = document.getElementById("delete-done-tasks");
 deleteDoneTasks.addEventListener('click', () => {
-    deleteTasks(listTasksId);
+    deleteTasks(listDoneTasksId);
     localStorage.removeItem(doneTasksKey); 
 });
 
