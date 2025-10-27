@@ -52,7 +52,10 @@ export function createTaskFrame(isDone=false){
     const taskFrame = document.createElement("li");
     taskFrame.className = "task";
     taskFrame.setAttribute("draggable", true);
-    taskFrame.addEventListener("dragstart", (e) => { e.dataTransfer.setData("text", e.target.id) })
+    taskFrame.addEventListener("dragstart", (e) => { 
+        e.dataTransfer.setData("text", e.target.id);
+        e.target.classList.add("dragging")
+        })
     if (!isDone){
         taskFrame.addEventListener("mouseenter", (e) => { displayEditButton(e.target) });
         taskFrame.addEventListener("mouseleave", (e) => { nonDisplayEditButton(e.target) });
