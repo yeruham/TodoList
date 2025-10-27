@@ -97,6 +97,6 @@ taskLocalStorage.tasksFromLocalStorage(listTasksId, listDoneTasksId)
 
 
 // create event for drag & drop tasks in list task to do 
-const TasksFrame = document.getElementById(listTasksId)
-TasksFrame.addEventListener("dragover", (e) => { e.preventDefault(); })
-TasksFrame.addEventListener("drop", (e) => { dragAnsDropTask(e, TasksFrame); })
+const tasksFrame = document.getElementById(listTasksId)
+tasksFrame.addEventListener("dragover", (e) => { e.preventDefault(); })
+tasksFrame.addEventListener("drop", (e) => { dragAnsDropTask(e, tasksFrame); })

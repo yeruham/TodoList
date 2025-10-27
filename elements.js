@@ -52,10 +52,10 @@ export function createTaskFrame(isDone=false){
     const taskFrame = document.createElement("li");
     taskFrame.className = "task";
     taskFrame.setAttribute("draggable", true);
-    taskFrame.addEventListener("dragstart", (e) => { 
+    if (!isDone){
+        taskFrame.addEventListener("dragstart", (e) => { 
         e.dataTransfer.setData("text", e.target.id);
         })
-    if (!isDone){
         taskFrame.addEventListener("mouseenter", (e) => { displayEditButton(e.target) });
         taskFrame.addEventListener("mouseleave", (e) => { nonDisplayEditButton(e.target) });
     }else{
@@ -67,16 +67,19 @@ export function createTaskFrame(isDone=false){
 
 export function createTaskElement(text, done=false){
     const textElement = createTextElement(text);
-    const editElement = createEditButton();
     const deleteElement = createDeleteButton();
     const doneElement = createDoneButton(done);
 
     const fullTaskElement = createTaskFrame(done);
     
     fullTaskElement.appendChild(textElement);
-    fullTaskElement.appendChild(editElement);
     fullTaskElement.appendChild(deleteElement);
     fullTaskElement.appendChild(doneElement);
+
+    if (!done){
+        const editElement = createEditButton();
+        fullTaskElement.appendChild(editElement);
+    }
 
     return fullTaskElement;
 }

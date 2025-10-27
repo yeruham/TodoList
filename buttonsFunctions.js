@@ -1,4 +1,4 @@
-import { createDoneButton } from './elements.js';
+import { createDoneButton, createTaskElement } from './elements.js';
 import * as taskLocalStorage from './taskLocalStorage.js';
 
 
@@ -37,19 +37,16 @@ export function editTaskByKeys(e){
 
 export function moveDoneTask(taskElement){
     // move done task from tasks element to done-tasks element and from tasks key to done-tasks in local storage.
-    // accepts as a parameter event of done button. \
-    taskElement.getElementsByClassName("done-task")[0].remove()
-    taskElement.getElementsByClassName("edit-task")[0].remove()
-    styleOfTaskElement(taskElement, true)
-    taskElement.appendChild(createDoneButton(true))
-    let localStorageKey = taskElement.parentElement.id;
-    localStorage.removeItem(taskElement.id);
-
-    const doneTasks = document.getElementById("done-tasks");
-    doneTasks.appendChild(taskElement);
-    localStorageKey = doneTasks.id;
+    // accepts as a parameter event of done button. 
+    
     const textTask = taskElement.getElementsByClassName("text-task")[0].innerText;
-    taskElement.id = taskLocalStorage.addValue(true, textTask);
+    const doneTaskElement = createTaskElement(textTask, true);
+    const doneTasks = document.getElementById("done-tasks");
+    doneTasks.appendChild(doneTaskElement);
+
+    doneTaskElement.id = taskLocalStorage.addValue(true, textTask);
+    localStorage.removeItem(taskElement.id);
+    taskElement.remove();
 }
 
 
