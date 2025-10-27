@@ -1,5 +1,6 @@
 import * as taskLocalStorage from './taskLocalStorage.js';
 import * as elements from './elements.js';
+import { moveDoneTask } from './buttonsFunctions.js';
 
 
 function readInput(id){
@@ -51,7 +52,7 @@ function dragAnsDropTask(e, TasksFrame){
             elementIndex = i;
         }
     }
-    const afterElement = tasks[elementIndex]
+    const afterElement = tasks[elementIndex];
     if (!afterElement){
         return;
     }
@@ -64,9 +65,9 @@ function dragAnsDropTask(e, TasksFrame){
 }
 
 
-const listTasksId = "todo-tasks"
-const listDoneTasksId = "done-tasks"
-const inputId = "input-task"
+const listTasksId = "todo-tasks";
+const listDoneTasksId = "done-tasks";
+const inputId = "input-task";
 
 
 // create click evenet on add-task button - for add text from input button
@@ -93,10 +94,21 @@ deleteDoneTasks.addEventListener('click', () => {
 });
 
 // pulls out all the exist task from the local storage 
-taskLocalStorage.tasksFromLocalStorage(listTasksId, listDoneTasksId)
+taskLocalStorage.tasksFromLocalStorage(listTasksId, listDoneTasksId);
 
 
-// create event for drag & drop tasks in list task to do 
-const tasksFrame = document.getElementById(listTasksId)
-tasksFrame.addEventListener("dragover", (e) => { e.preventDefault(); })
-tasksFrame.addEventListener("drop", (e) => { dragAnsDropTask(e, tasksFrame); })
+// create event for drag & drop tasks in list task to do - listens to all task-container
+const taskContainer = document.getElementById("to-do-container");
+const tasksFrame = document.getElementById(listTasksId);
+taskContainer.addEventListener("dragover", (e) => { e.preventDefault(); });
+taskContainer.addEventListener("drop", (e) => { dragAnsDropTask(e, tasksFrame); });
+
+
+
+// create event for drag & drop tasks in list done task - listens to all done-task-container 
+const doneTasksFrame = document.getElementById("done-container");
+doneTasksFrame.addEventListener("dragover", (e) => { e.preventDefault(); });
+doneTasksFrame.addEventListener("drop", (e) => {
+    const draggedElement = document.getElementById(e.dataTransfer.getData("text"));
+    moveDoneTask(draggedElement); 
+});

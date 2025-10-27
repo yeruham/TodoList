@@ -38,11 +38,11 @@ export function editTaskByKeys(e){
 export function moveDoneTask(taskElement){
     // move done task from tasks element to done-tasks element and from tasks key to done-tasks in local storage.
     // accepts as a parameter event of done button. 
-    
+
     const textTask = taskElement.getElementsByClassName("text-task")[0].innerText;
     const doneTaskElement = createTaskElement(textTask, true);
     const doneTasks = document.getElementById("done-tasks");
-    doneTasks.appendChild(doneTaskElement);
+    doneTasks.prepend(doneTaskElement);
 
     doneTaskElement.id = taskLocalStorage.addValue(true, textTask);
     localStorage.removeItem(taskElement.id);

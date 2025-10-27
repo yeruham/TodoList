@@ -51,15 +51,15 @@ export function createEditButton(){
 export function createTaskFrame(isDone=false){
     const taskFrame = document.createElement("li");
     taskFrame.className = "task";
-    taskFrame.setAttribute("draggable", true);
     if (!isDone){
+        taskFrame.setAttribute("draggable", true);
         taskFrame.addEventListener("dragstart", (e) => { 
         e.dataTransfer.setData("text", e.target.id);
         })
         taskFrame.addEventListener("mouseenter", (e) => { displayEditButton(e.target) });
         taskFrame.addEventListener("mouseleave", (e) => { nonDisplayEditButton(e.target) });
     }else{
-        styleOfTaskElement(taskFrame, true)
+        styleOfTaskElement(taskFrame, true);
     }
     return taskFrame;
 }
