@@ -2,7 +2,7 @@ import * as elements from './elements.js';
 
 
 export function addValue(isDone, value){
-    const valueId = Date.now();
+    const valueId = Date.now() + performance.now();
     let localStorageValue = {"task": value, "done": isDone};
     localStorageValue = JSON.stringify(localStorageValue);
     localStorage.setItem(valueId, localStorageValue);
