@@ -22,11 +22,11 @@ export function editValue(id, newValue){
 }
 
 
-export function deleteDoneTasks(){
+export function deleteTasks(done){
     const tasks = Object.entries(localStorage);
     for (let [key, value] of tasks){
         value = JSON.parse(value);
-        if (value.done){
+        if (value.done == done){
             localStorage.removeItem(key);
         }
     }
@@ -35,6 +35,7 @@ export function deleteDoneTasks(){
 
 export function tasksFromLocalStorage(listTasksId, listDoneTasksId){
     const tasks = Object.entries(localStorage)
+    tasks.sort((a, b) => a[0] - b[0])
     if (tasks == null){
         return;
     }
@@ -46,7 +47,7 @@ export function tasksFromLocalStorage(listTasksId, listDoneTasksId){
         const newTaskElement = elements.createTaskElement(textTask, value.done);
         newTaskElement.id = key;
         if (value.done){
-            listDoneTasks.appendChild(newTaskElement)
+            listDoneTasks.prepend(newTaskElement)
         }
         else{
             listTasks.appendChild(newTaskElement);

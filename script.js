@@ -62,6 +62,12 @@ function dragAnsDropTask(e, TasksFrame){
     else{
         TasksFrame.insertBefore(draggedElement, afterElement);
     }
+
+    taskLocalStorage.deleteTasks(false);
+    for (let i = 0; i < tasks.length; i++){
+        const textTask = tasks[i].getElementsByClassName("text-task")[0].innerText;
+        tasks[i].id = taskLocalStorage.addValue(false, textTask);
+    };
 }
 
 
@@ -90,7 +96,7 @@ deleteAll.addEventListener('click', () => {
 const deleteDoneTasks = document.getElementById("delete-done-tasks");
 deleteDoneTasks.addEventListener('click', () => {
     deleteTasks(listDoneTasksId);
-    taskLocalStorage.deleteDoneTasks();
+    taskLocalStorage.deleteTasks(true);
 });
 
 // pulls out all the exist task from the local storage 
