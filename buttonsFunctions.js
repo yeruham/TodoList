@@ -40,7 +40,7 @@ export function moveDoneTask(taskElement){
     // accepts as a parameter event of done button. \
     taskElement.getElementsByClassName("done-task")[0].remove()
     taskElement.getElementsByClassName("edit-task")[0].remove()
-    styleOfTaskElement(taskElement, normal=true)
+    styleOfTaskElement(taskElement, true)
     taskElement.appendChild(createDoneButton(true))
     let localStorageKey = taskElement.parentElement.id;
     localStorage.removeItem(taskElement.id);

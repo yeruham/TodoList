@@ -38,6 +38,32 @@ function deleteTasks(listTasksId){
 }
 
 
+function dragAnsDropTask(e, TasksFrame){
+    const draggedElement = document.getElementById(e.dataTransfer.getData("text"));
+    const tasks =  TasksFrame.getElementsByClassName("task");
+    let distance = Number.POSITIVE_INFINITY;
+    let elementIndex;
+    for (let i = 0; i < tasks.length; i++){
+        const box = tasks[i].getBoundingClientRect();
+        const offset = Math.abs(e.clientY - box.top - box.height / 2);
+        if (offset < distance){
+            distance = offset;
+            elementIndex = i;
+        }
+    }
+    const afterElement = tasks[elementIndex]
+    if (!afterElement){
+        return;
+    }
+    else if (afterElement.getBoundingClientRect().y > draggedElement.getBoundingClientRect().y){
+        TasksFrame.insertBefore(draggedElement, afterElement.nextSibling);
+    }
+    else{
+        TasksFrame.insertBefore(draggedElement, afterElement);
+    }
+}
+
+
 const listTasksId = "todo-tasks"
 const listDoneTasksId = "done-tasks"
 const inputId = "input-task"
@@ -70,71 +96,7 @@ deleteDoneTasks.addEventListener('click', () => {
 taskLocalStorage.tasksFromLocalStorage(listTasksId, listDoneTasksId)
 
 
-const listTasks = document.getElementById(listTasksId)
-listTasks.addEventListener("dragover", (e) => { 
-        e.preventDefault();
-       })
-
-
-listTasks.addEventListener("drop", (e) => {
-    // console.log(e.target);
-    const draggedElement = document.getElementById(e.dataTransfer.getData("text"));
-    // listTasks.appendChild(draggedElement);
-    const afterElement = getDragAfterElement(listTasks, e.clientY)
-    // console.log(afterElement)
-    // if (afterElement == undefined){
-    //     listTasks.appendChild(draggedElement) // add to the end
-    // }else{
-        if (afterElement.getBoundingClientRect().y > draggedElement.getBoundingClientRect().y){
-            console.log("down")
-            listTasks.insertBefore(draggedElement, afterElement.nextSibling) 
-        }
-        else{
-            console.log("up")
-            listTasks.insertBefore(draggedElement, afterElement)
-        }
-})
-
-
-// const getDragAfterElement = (container, y) => {
-//   const notDraggedCards =
-//     [...container.querySelectorAll(".task:not(.dragging)")]
-  
-//   return notDraggedCards.reduce((closest, child) => {
-//     console.log()
-//     const box = child.getBoundingClientRect()
-//     const offset = y - box.top - box.height / 2
-//     console.log(offset)
-//     if (offset < 0 && offset > closest.offset) {
-//       return { offset, element: child }
-//     } else return closest
-//   }, { offset: Number.NEGATIVE_INFINITY }).element
-// }
-
-
-function getDragAfterElement(listTasks, clientY){
-    const notDraggedTasks =  listTasks.getElementsByClassName("task");
-    let x = Number.POSITIVE_INFINITY;
-    let elementIndex;
-    for (let i = 0; i < notDraggedTasks.length; i++){
-        const box = notDraggedTasks[i].getBoundingClientRect();
-        const offset = clientY - box.top - box.height / 2
-        console.log(notDraggedTasks[i], offset)
-        const distance = Math.abs(offset)
-        if (distance < x){
-            x = distance
-            elementIndex = i;
-        }
-    }
-        return notDraggedTasks[elementIndex] 
-}
-
-// const a = [1, 2, 3, 4, 5]
-// console.log(a.reduce((sum, num) => { return sum -= num }, 0))
-
-
-//   const notDraggedCards = [...listTasks.querySelectorAll(".task")];
-//   for (let element of notDraggedCards){
-//     console.log(element)
-//     console.log(element.getBoundingClientRect())
-//   }
+// create event for drag & drop tasks in list task to do 
+const TasksFrame = document.getElementById(listTasksId)
+TasksFrame.addEventListener("dragover", (e) => { e.preventDefault(); })
+TasksFrame.addEventListener("drop", (e) => { dragAnsDropTask(e, TasksFrame); })

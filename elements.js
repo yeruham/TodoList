@@ -54,7 +54,6 @@ export function createTaskFrame(isDone=false){
     taskFrame.setAttribute("draggable", true);
     taskFrame.addEventListener("dragstart", (e) => { 
         e.dataTransfer.setData("text", e.target.id);
-        e.target.classList.add("dragging")
         })
     if (!isDone){
         taskFrame.addEventListener("mouseenter", (e) => { displayEditButton(e.target) });
