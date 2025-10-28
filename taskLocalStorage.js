@@ -39,13 +39,13 @@ export function deleteTasks(done){
 
 
 export function tasksFromLocalStorage(listTasksId, listDoneTasksId){
-    const tasks = Object.entries(localStorage)
-    tasks.sort((a, b) => a[0] - b[0])
+    const tasks = Object.entries(localStorage);
     if (tasks == null){
         return;
     }
+    tasks.sort((a, b) => a[0] - b[0]);
     const listTasks = document.getElementById(listTasksId);
-    const listDoneTasks = document.getElementById(listDoneTasksId)
+    const listDoneTasks = document.getElementById(listDoneTasksId);
     for (let [key, value] of tasks){
         value = JSON.parse(value);
         const textTask = value.task;
