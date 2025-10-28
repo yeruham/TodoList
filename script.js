@@ -62,12 +62,8 @@ function dragAnsDropTask(e, TasksFrame){
     else{
         TasksFrame.insertBefore(draggedElement, afterElement);
     }
-
-    taskLocalStorage.deleteTasks(false);
-    for (let i = 0; i < tasks.length; i++){
-        const textTask = tasks[i].getElementsByClassName("text-task")[0].innerText;
-        tasks[i].id = taskLocalStorage.addValue(false, textTask);
-    };
+    
+    taskLocalStorage.updateOrderTasks(false, tasks);
 }
 
 

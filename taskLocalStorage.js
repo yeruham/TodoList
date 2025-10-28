@@ -2,7 +2,12 @@ import * as elements from './elements.js';
 
 
 export function addValue(isDone, value){
-    const valueId = Date.now() + performance.now();
+    let valueId = Date.now();
+    let valueIdExist = localStorage.getItem(valueId); 
+    while(valueIdExist){
+        valueId += 1;
+        valueIdExist = localStorage.getItem(valueId); 
+    };
     let localStorageValue = {"task": value, "done": isDone};
     localStorageValue = JSON.stringify(localStorageValue);
     localStorage.setItem(valueId, localStorageValue);
@@ -53,4 +58,13 @@ export function tasksFromLocalStorage(listTasksId, listDoneTasksId){
             listTasks.appendChild(newTaskElement);
         }
     }
+}
+
+
+export function updateOrderTasks(done, tasks){
+    deleteTasks(done);
+    for (let i = 0; i < tasks.length; i++){
+        const textTask = tasks[i].getElementsByClassName("text-task")[0].innerText;
+        tasks[i].id = addValue(false, textTask);
+    };
 }
