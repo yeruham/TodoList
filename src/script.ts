@@ -49,7 +49,7 @@ function dragAnsDropTask(e: DragEvent, TasksFrame: HTMLElement): void{
     const draggedElement: HTMLElement = document.getElementById(draggedId)!;
     const tasks: HTMLCollection =  TasksFrame.getElementsByClassName("task");
     let distance: number = Number.POSITIVE_INFINITY;
-    let elementIndex: number = 0;
+    let elementIndex: number | null = null;
     for (let i = 0; i < tasks.length; i++){
         const box: DOMRect = tasks[i]!.getBoundingClientRect();
         const offset: number = Math.abs(e.clientY - box.top - box.height / 2);
@@ -57,12 +57,12 @@ function dragAnsDropTask(e: DragEvent, TasksFrame: HTMLElement): void{
             distance = offset;
             elementIndex = i;
         }
-    }
-    const afterElement = tasks[elementIndex];
-    if (!afterElement){
+    }    
+    if (!elementIndex){
         return;
     }
-    else if (afterElement.getBoundingClientRect().y > draggedElement.getBoundingClientRect().y){
+    const afterElement = tasks[elementIndex]!;
+    if (afterElement.getBoundingClientRect().y > draggedElement.getBoundingClientRect().y){
         TasksFrame.insertBefore(draggedElement, afterElement.nextSibling);
     }
     else{
